@@ -41,14 +41,14 @@ def forward_kin(q1,q2,q3,q4,q5,q6):
     T6g = pose(0, 0, 0, 0.303)
     T0g = T0g * T6g
     points.append(T0g)
-    
-    # Extrai só as posições x,y,z de cada junta para plotagem
+
+    # Extract only the x,y,z positions of each joint for plotting
     X = [float(p[0,3]) for p in points]
     Y = [float(p[1,3]) for p in points]
     Z = [float(p[2,3]) for p in points]
     return X, Y, Z
 
-# Funções auxiliares para IK (baseadas no seu código original)
+# Functions to calculate angles based on the wrist center and rotation matrix
 def get_hypotenuse(a, b):
     return sqrt(a*a + b*b)
 
@@ -110,24 +110,24 @@ def get_angles(x, y, z, roll, pitch, yaw):
     q1, q2, q3, q4, q5, q6 = symbols('q1:7')
     alpha, beta, gamma = symbols('alpha beta gamma', real=True)
     
-    # Rotation matrix R0u do gripper baseada em roll, pitch, yaw
+    # Rotation matrix R0u of gripper based on roll, pitch, yaw
     R0u = Matrix([
         [cos(alpha)*cos(beta), -sin(alpha)*cos(gamma) + sin(beta)*sin(gamma)*cos(alpha), sin(alpha)*sin(gamma) + sin(beta)*cos(alpha)*cos(gamma)],
         [sin(alpha)*cos(beta), sin(alpha)*sin(beta)*sin(gamma) + cos(alpha)*cos(gamma), sin(alpha)*sin(beta)*cos(gamma) - sin(gamma)*cos(alpha)],
         [-sin(beta), sin(gamma)*cos(beta), cos(beta)*cos(gamma)]
     ])
     
-    # Matriz RguT para ajustar orientação entre frames
+    # Matriz RguT to adjust orientation between frames
     RguT_eval = Matrix([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
-    
-    # Avalia a rotação com os valores reais
+
+    # It evaluates the rotation with the actual values
     R0u_eval = R0u.evalf(subs = {alpha: yaw, beta: pitch, gamma: roll})
     R0g_eval = R0u_eval * RguT_eval
     
     wrist_center = get_wrist_center(gripper_point, R0g_eval, dg=0.303)
     j1, j2, j3 = get_first_three_angles(wrist_center)
     
-    # R03 transposta
+    # R03 transposed to get the orientation of the first three joints
     R03T = Matrix([
         [sin(j2 + j3)*cos(j1), sin(j1)*sin(j2 + j3),  cos(j2 + j3)],
         [cos(j1)*cos(j2 + j3), sin(j1)*cos(j2 + j3), -sin(j2 + j3)],

@@ -10,11 +10,11 @@ JOINT_LIMITS = [
 ]
 
 def lerp(start, end, t):
-    """Interpolação linear escalar"""
+    """interpolation between start and end with t in [0, 1]"""
     return start + t*(end - start)
 
 def lerp_pose(start_pose, end_pose, steps):
-    """Interpolação linear para posição + orientação (6 valores)"""
+    """linear interpolation for position + orientation (6 values)"""
     poses = []
     for i in range(steps+1):
         t = i/steps
@@ -22,7 +22,7 @@ def lerp_pose(start_pose, end_pose, steps):
         poses.append(interp)
     return poses
 
-def dentro_dos_limites(angles):
+def inside_of_limits(angles):
     for i, angle in enumerate(angles):
         low, high = JOINT_LIMITS[i]
         if angle < low or angle > high:

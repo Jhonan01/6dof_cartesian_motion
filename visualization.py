@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def cria_plot():
+def create_plot():
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.set_xlim(0, 3)
@@ -13,7 +13,7 @@ def cria_plot():
     plt.show()
     return fig, ax
 
-def atualiza_plot(ax, X, Y, Z):
+def update_plot(ax, X, Y, Z):
     ax.cla()
     ax.plot(X, Y, Z, '-o', color='blue')
     ax.set_xlim(0, 3)
