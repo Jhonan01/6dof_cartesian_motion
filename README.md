@@ -33,16 +33,22 @@ The program accepts user commands for the desired Cartesian position and orienta
 1. Clone or download this repository.
 
 2. Navigate to the project folder:
-
+    
+    ```bash
     cd 6dof_cartesian_motion
+    ```
 
 3. Install dependencies (if not already installed):
 
+    ```bash
     pip install sympy==1.13.1 matplotlib==3.10.0
+    ```
 
 4. Run the main program:
 
+    ```bash
     python main.py
+    ```
 
 5. When prompted, enter the desired end-effector pose in the format:
 
