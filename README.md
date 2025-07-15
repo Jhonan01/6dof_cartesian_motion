@@ -1,3 +1,13 @@
-# 6dof_cartesian_motion
+# 6DOF Cartesian Motion Robot
 
-pip install -r requirements.txt
+## Requisitos
+
+- Python 3.12.8
+- Bibliotecas:
+  - sympy==1.13.1
+  - matplotlib==3.10.0
+
+## Como rodar
+
+```bash
+python main.py
