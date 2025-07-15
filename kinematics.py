@@ -104,10 +104,10 @@ def get_last_three_angles(R):
     
     return q4, q5, q6
 
+# That uses inverse kinematics to get joint angles returning q1 to q6
 def get_angles(x, y, z, roll, pitch, yaw):
-    from sympy import Matrix, symbols
     gripper_point = x, y, z
-    q1, q2, q3, q4, q5, q6 = symbols('q1:7')
+    # q1, q2, q3, q4, q5, q6 = j1, j2, j3, j4, j5, j6
     alpha, beta, gamma = symbols('alpha beta gamma', real=True)
     
     # Rotation matrix R0u of gripper based on roll, pitch, yaw
@@ -137,4 +137,5 @@ def get_angles(x, y, z, roll, pitch, yaw):
     
     j4, j5, j6 = get_last_three_angles(R36_eval)
     
+    # Return angles in radians q1 to q6
     return j1.evalf(), j2.evalf(), j3.evalf(), j4.evalf(), j5.evalf(), j6.evalf()

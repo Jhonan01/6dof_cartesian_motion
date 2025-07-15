@@ -12,7 +12,7 @@ def main():
     
     while True:
         try:
-            entrada = input("Enter x y z roll pitch yaw (in degrees) or 'exit': ")
+            entrada = input("Enter x y z roll pitch yaw (in degrees) ex: (1 1 1 0 90 0) or 'exit': ")
             if entrada.strip().lower() == 'exit':
                 break
             
@@ -21,14 +21,14 @@ def main():
                 print("Please, enter 6 values: x y z roll pitch yaw")
                 continue
             
-            target_pose = [math.radians(v) if i >= 3 else v for i, v in enumerate(valores)]
+            target_pose = [math.radians(v) if i >= 3 else v for i, v in enumerate(valores)] #Degrees to radians
             
-            q_final = get_angles(*target_pose)
-            if not inside_of_limits(q_final):
+            q_final = get_angles(*target_pose) # That uses IK to get joint angles returning q1 to q6
+            if not inside_of_limits(q_final): # Check if angles are within limits
                 print("[ERROR] Joint limits out of range.")
                 continue
             
-            traj = lerp_pose(current_pose, target_pose, steps=50)
+            traj = lerp_pose(current_pose, target_pose, steps=50) # Linear interpolation for smooth movement
 
             print(f"Starting movement to {valores[:3]} and orientation {valores[3:]} (in degrees)")
 
