@@ -28,12 +28,6 @@ The program accepts user commands for the desired Cartesian position and orienta
   - matplotlib==3.10.0
 - unittest (built-in Python module, no installation needed)
 
-You can install the required libraries with:
-
-```bash
-pip install sympy==1.13.1 matplotlib==3.10.0
-```
-
 ## How to run the program
 
 1. Clone or download this repository.
