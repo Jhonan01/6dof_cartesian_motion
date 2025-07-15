@@ -61,8 +61,24 @@ The program accepts user commands for the desired Cartesian position and orienta
 
     1.0 1.0 1.0 0 45 90
 
-6. Observe the robot arm moving smoothly to the target pose, with printed joint angles and a 3D visualization.
+6. Running Unit Tests
 
-7. To exit, type `sair` or `exit`.
+    Forward kinematics output dimensions
+
+    Inverse kinematics for known reachable positions
+
+    Joint limit boundary checks
+
+    Cartesian trajectory interpolation
+
+   To run the tests, execute the following command from the project root:
+
+    ```bash
+    python -m unittest discover -s tests
+    ```
+
+7. Observe the robot arm moving smoothly to the target pose, with printed joint angles and a 3D visualization.
+
+8. To exit, type `sair` or `exit`.
 
 

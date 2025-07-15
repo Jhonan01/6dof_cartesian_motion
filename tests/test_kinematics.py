@@ -1,6 +1,6 @@
 import unittest
 from kinematics import forward_kin, get_angles
-from trajectory import inside_of_limits
+from trajectory import inside_of_limits, lerp_pose
 from math import radians
 
 class TestKinematics(unittest.TestCase):
@@ -22,6 +22,26 @@ class TestKinematics(unittest.TestCase):
         # It forces a value out of the limits of joint 2 (expected False)
         angles = (0, radians(100), 0, 0, 0, 0)
         self.assertFalse(inside_of_limits(angles))
+
+    def test_lerp_pose(self):
+        start = [0, 0, 0, 0, 0, 0]
+        end = [1, 2, 3, 0.1, 0.2, 0.3]
+        steps = 10
+
+        traj = lerp_pose(start, end, steps)
+
+        # It must have steps+1 poses
+        self.assertEqual(len(traj), steps + 1)
+
+        # Each pose must have 6 values
+        for pose in traj:
+            self.assertEqual(len(pose), 6)
+
+        # The first pose must be equal to the start
+        self.assertEqual(traj[0], start)
+
+        # The last pose must be equal to the end
+        self.assertEqual(traj[-1], end)
 
 if __name__ == '__main__':
     unittest.main()
