@@ -32,6 +32,10 @@ The program accepts user commands for the desired Cartesian position and orienta
 
 1. Clone or download this repository.
 
+    ```bash
+    git clone https://github.com/Jhonan01/6dof_cartesian_motion.git
+    ```
+    
 2. Navigate to the project folder:
     
     ```bash
